@@ -126,9 +126,27 @@ async def run_bot():
 def main():
     keep_alive()
     nest_asyncio.apply()
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-    loop.run_until_complete(run_bot())
+    asyncio.get_event_loop().run_until_complete(run_bot())
 
 if __name__ == "__main__":
-    Thread(target=main).start()
+    main()
+# =======================
+# 🚀 KHỞI CHẠY BOT (ỔN ĐỊNH 24/7)
+# =======================
+async def run_bot():
+    app = ApplicationBuilder().token(TOKEN).build()
+    app.add_handler(MessageHandler(filters.StatusUpdate.NEW_CHAT_MEMBERS, welcome))
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, check_message))
+    app.add_handler(CommandHandler("start", start))  # /start riêng tư để test
+
+    print("🤖 Winbook Bot đang chạy 24/7...")
+    await app.run_polling()
+
+def main():
+    keep_alive()
+    nest_asyncio.apply()
+    asyncio.get_event_loop().run_until_complete(run_bot())
+
+if __name__ == "__main__":
+    main()
+
