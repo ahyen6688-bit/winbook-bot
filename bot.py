@@ -1,6 +1,6 @@
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
-import logging, asyncio, nest_asyncio
+from telegram.ext import ApplicationBuilder, MessageHandler, filters, ContextTypes
+import logging, nest_asyncio, asyncio
 from keep_alive import keep_alive
 from threading import Thread
 
@@ -26,41 +26,52 @@ logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     level=logging.INFO
 )
+logger = logging.getLogger(__name__)
 
 # =======================
-# 👋 CHÀO THÀNH VIÊN MỚI
+# 👋 TỰ ĐỘNG CHÀO THÀNH VIÊN MỚI
 # =======================
 async def welcome(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    for member in update.message.new_chat_members:
-        chat_id = update.message.chat_id
+    try:
+        for member in update.message.new_chat_members:
+            chat_id = update.message.chat_id
 
-        keyboard = [
-            [
-                InlineKeyboardButton("🌐 Trang chủ", url=HOMEPAGE),
-                InlineKeyboardButton("👑 Admin", url=ADMIN_LINK)
+            keyboard = [
+                [
+                    InlineKeyboardButton("🌐 Trang chủ", url=HOMEPAGE),
+                    InlineKeyboardButton("👑 Admin", url=ADMIN_LINK)
+                ]
             ]
-        ]
-        reply_markup = InlineKeyboardMarkup(keyboard)
+            reply_markup = InlineKeyboardMarkup(keyboard)
 
-        text = (
-            f"🎉 Chào mừng {member.mention_html()} đến với Winbook!\n\n"
-            f"💚 Chúc bạn vui vẻ và may mắn trong nhóm nhé 💚"
-        )
-
-        try:
-            await context.bot.send_video(
-                chat_id=chat_id,
-                video=VIDEO_URL,
-                caption=text,
-                parse_mode="HTML",
-                reply_markup=reply_markup
+            text = (
+                f"🎉 Chào mừng {member.mention_html()} đến với Winbook!\n\n"
+                f"💚 Chúc bạn vui vẻ và may mắn trong nhóm nhé 💚"
             )
-        except Exception as e:
-            logging.warning(f"Lỗi gửi video: {e}")
-            await context.bot.send_message(chat_id=chat_id, text=text, parse_mode="HTML")
+
+            # Gửi video chào (nếu link lỗi sẽ fallback sang text)
+            try:
+                await context.bot.send_video(
+                    chat_id=chat_id,
+                    video=VIDEO_URL,
+                    caption=text,
+                    parse_mode="HTML",
+                    reply_markup=reply_markup
+                )
+            except Exception as e:
+                logger.warning(f"Không gửi được video: {e}")
+                await context.bot.send_message(
+                    chat_id=chat_id,
+                    text=text,
+                    parse_mode="HTML",
+                    reply_markup=reply_markup
+                )
+
+    except Exception as e:
+        logger.error(f"Lỗi trong welcome(): {e}")
 
 # =======================
-# 🚫 LỌC TIN NHẮN XẤU
+# 🚫 LỌC TIN NHẮN BẬY
 # =======================
 async def check_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not update.message or not update.message.text:
@@ -73,8 +84,8 @@ async def check_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if any(bad_word in text for bad_word in BAD_WORDS):
         try:
             await update.message.delete()
-        except Exception as e:
-            logging.warning(f"Không thể xóa tin nhắn: {e}")
+        except:
+            pass
 
         user_id = user.id
         violation_count[user_id] = violation_count.get(user_id, 0) + 1
@@ -95,28 +106,22 @@ async def check_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             try:
                 await context.bot.ban_chat_member(chat_id, user_id)
             except Exception as e:
-                logging.warning(f"Không thể kick: {e}")
+                logger.warning(f"Không thể kick: {e}")
             violation_count.pop(user_id, None)
 
 # =======================
-# 🧩 LỆNH /START
-# =======================
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("🤖 Winbook Bot đang hoạt động ngon lành 24/7!")
-
-# =======================
-# 🚀 KHỞI CHẠY BOT
+# 🚀 CHẠY BOT
 # =======================
 async def run_bot():
     app = ApplicationBuilder().token(TOKEN).build()
-    app.add_handler(CommandHandler("start", start))
     app.add_handler(MessageHandler(filters.StatusUpdate.NEW_CHAT_MEMBERS, welcome))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, check_message))
-    print("🤖 Winbook Bot đang chạy ổn định 24/7...")
+
+    print("🤖 Winbook Bot đang chạy 24/7...")
     await app.initialize()
     await app.start()
     await app.updater.start_polling()
-    await asyncio.Event().wait()  # giữ bot chạy mãi
+    await asyncio.Event().wait()
 
 def main():
     keep_alive()
