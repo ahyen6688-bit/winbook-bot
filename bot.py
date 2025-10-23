@@ -7,7 +7,8 @@ from threading import Thread
 # =======================
 # ⚙️ CẤU HÌNH
 # =======================
-TOKEN = "8385289868:AAGIeT_pQsXvwZB6QuypM1EihtdApXKjSe8"
+import os
+TOKEN = os.getenv("BOT_TOKEN")
 VIDEO_URL = "https://streamable.com/i5w6rq"
 ADMIN_LINK = "https://t.me/Mikamika2111"
 HOMEPAGE = "https://www.winbook1.com"
