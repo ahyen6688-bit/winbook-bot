@@ -7,7 +7,7 @@ from threading import Thread
 # =======================
 # ⚙️ CẤU HÌNH
 # =======================
-TOKEN = "8452228295:AAGk0BQqaRaqIw16BCL1jnZ0WL7OaoiUe5Q"
+TOKEN = "8385289868:AAGIeT_pQsXvwZB6QuypM1EihtdApXKjSe8"
 VIDEO_URL = "https://streamable.com/i5w6rq"
 ADMIN_LINK = "https://t.me/Mikamika2111"
 HOMEPAGE = "https://www.winbook1.com"
