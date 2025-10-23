@@ -7,7 +7,7 @@ from keep_alive import keep_alive
 # ⚙️ CẤU HÌNH
 # =======================
 TOKEN = os.getenv("BOT_TOKEN")
-VIDEO_URL = "https://streamable.com/i5w6rq"
+VIDEO_URL = "https://i.postimg.cc/52vs8rFb/BANNER-CH-O-TH-NH-VI-N.gif"
 ADMIN_LINK = "https://t.me/Mikamika2111"
 HOMEPAGE = "https://www.winbook1.com"
 
@@ -47,13 +47,13 @@ async def welcome(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
 
         try:
-            await context.bot.send_video(
-                chat_id=chat_id,
-                video=VIDEO_URL,
-                caption=caption,
-                parse_mode="HTML",
-                reply_markup=reply_markup
-            )
+            await context.bot.send_animation(
+    chat_id=chat_id,
+    animation=VIDEO_URL,
+    caption=caption,
+    parse_mode="HTML",
+    reply_markup=reply_markup
+       )
         except Exception as e:
             await context.bot.send_message(
                 chat_id=chat_id,
