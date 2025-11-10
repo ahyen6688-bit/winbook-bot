@@ -8,8 +8,15 @@ from keep_alive import keep_alive
 # =======================
 TOKEN = os.getenv("BOT_TOKEN")
 VIDEO_URL = "https://i.postimg.cc/52vs8rFb/BANNER-CH-O-TH-NH-VI-N.gif"
-ADMIN_LINK = "https://t.me/Mikamika2111"
-HOMEPAGE = "https://www.winbook1.com"
+
+# Liên kết chính thức
+LINK_DANG_KY = "https://www.winbook1.com"
+LIVE_CHAT = "https://direct.lc.chat/19366399/"
+CSKH001 = "https://t.me/WinbookCSKH001"
+CSKH002 = "https://t.me/WinbookCSKH002"
+KENH_CHINH = "https://t.me/WinbookEvent"
+NHOM_CHAT = "https://t.me/winbook8888"
+FANPAGE = "https://www.facebook.com/profile.php?id=100076695622884"
 
 BAD_WORDS = [
     "đụ", "địt", "dm", "dcm", "mẹ mày", "ngu", "cc", "lồn",
