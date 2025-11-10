@@ -33,12 +33,23 @@ async def welcome(update: Update, context: ContextTypes.DEFAULT_TYPE):
     for member in update.message.new_chat_members:
         chat_id = update.message.chat_id
 
-        keyboard = [
-            [
-                InlineKeyboardButton("🌐 Trang chủ", url=HOMEPAGE),
-                InlineKeyboardButton("👑 Admin", url=ADMIN_LINK)
-            ]
+            keyboard = [
+        [
+            InlineKeyboardButton("🔗 Đăng ký", url="https://www.winbook1.com"),
+            InlineKeyboardButton("💬 Live Chat", url="https://direct.lc.chat/19366399/")
+        ],
+        [
+            InlineKeyboardButton("👩‍💼 CSKH001", url="https://t.me/WinbookCSKH001"),
+            InlineKeyboardButton("👨‍💼 CSKH002", url="https://t.me/WinbookCSKH002")
+        ],
+        [
+            InlineKeyboardButton("📢 Kênh chính", url="https://t.me/WinbookEvent"),
+            InlineKeyboardButton("💭 Nhóm chat", url="https://t.me/winbook8888")
+        ],
+        [
+            InlineKeyboardButton("🌟 FANPAGE CHÍNH THỨC 🌟", url="https://www.facebook.com/profile.php?id=100076695622884")
         ]
+    ]
         reply_markup = InlineKeyboardMarkup(keyboard)
 
         caption = (
