@@ -8,19 +8,7 @@ from keep_alive import keep_alive
 # =======================
 TOKEN = os.getenv("BOT_TOKEN")
 VIDEO_URL = "https://i.postimg.cc/52vs8rFb/BANNER-CH-O-TH-NH-VI-N.gif"
-
-# Liên kết chính thức
-LINK_DANG_KY = "https://www.winbook1.com"
-LIVE_CHAT = "https://direct.lc.chat/19366399/"
-CSKH001 = "https://t.me/WinbookCSKH001"
-CSKH002 = "https://t.me/WinbookCSKH002"
-KENH_CHINH = "https://t.me/WinbookEvent"
-NHOM_CHAT = "https://t.me/winbook8888"
-FANPAGE = "https://www.facebook.com/profile.php?id=100076695622884"
-
-# 👇 Thêm 2 biến này cho hàm /start
-HOMEPAGE = LINK_DANG_KY
-ADMIN_LINK = CSKH001
+HOMEPAGE = "https://www.winbook1.com"
 
 BAD_WORDS = [
     "đụ", "địt", "dm", "dcm", "mẹ mày", "ngu", "cc", "lồn",
@@ -46,19 +34,19 @@ async def welcome(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         keyboard = [
             [
-                InlineKeyboardButton("🔗 Đăng ký", url=LINK_DANG_KY),
-                InlineKeyboardButton("💬 Live Chat", url=LIVE_CHAT)
+                InlineKeyboardButton("🔰 Đăng ký", url="https://www.winbook1.com"),
+                InlineKeyboardButton("💬 Live Chat", url="https://direct.lc.chat/19366399/")
             ],
             [
-                InlineKeyboardButton("👩‍💼 CSKH001", url=CSKH001),
-                InlineKeyboardButton("👨‍💼 CSKH002", url=CSKH002)
+                InlineKeyboardButton("👩‍💼 CSKH001", url="https://t.me/WinbookCSKH001"),
+                InlineKeyboardButton("👨‍💼 CSKH002", url="https://t.me/WinbookCSKH002")
             ],
             [
-                InlineKeyboardButton("📢 Kênh chính", url=KENH_CHINH),
-                InlineKeyboardButton("💭 Nhóm chat", url=NHOM_CHAT)
+                InlineKeyboardButton("📢 Kênh Chính", url="https://t.me/WinbookEvent"),
+                InlineKeyboardButton("💭 Nhóm Chat", url="https://t.me/winbook8888")
             ],
             [
-                InlineKeyboardButton("🌟 FANPAGE CHÍNH THỨC 🌟", url=FANPAGE)
+                InlineKeyboardButton("🌐 FANPAGE CHÍNH", url="https://www.facebook.com/profile.php?id=100076695622884")
             ]
         ]
         reply_markup = InlineKeyboardMarkup(keyboard)
@@ -120,8 +108,19 @@ async def check_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [
         [
-            InlineKeyboardButton("🌐 Trang chủ", url=HOMEPAGE),
-            InlineKeyboardButton("👑 Admin", url=ADMIN_LINK)
+            InlineKeyboardButton("🔰 Đăng ký", url="https://www.winbook1.com"),
+            InlineKeyboardButton("💬 Live Chat", url="https://direct.lc.chat/19366399/")
+        ],
+        [
+            InlineKeyboardButton("👩‍💼 CSKH001", url="https://t.me/WinbookCSKH001"),
+            InlineKeyboardButton("👨‍💼 CSKH002", url="https://t.me/WinbookCSKH002")
+        ],
+        [
+            InlineKeyboardButton("📢 Kênh Chính", url="https://t.me/WinbookEvent"),
+            InlineKeyboardButton("💭 Nhóm Chat", url="https://t.me/winbook8888")
+        ],
+        [
+            InlineKeyboardButton("🌐 FANPAGE CHÍNH", url="https://www.facebook.com/profile.php?id=100076695622884")
         ]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
