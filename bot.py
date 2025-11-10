@@ -18,6 +18,10 @@ KENH_CHINH = "https://t.me/WinbookEvent"
 NHOM_CHAT = "https://t.me/winbook8888"
 FANPAGE = "https://www.facebook.com/profile.php?id=100076695622884"
 
+# 👇 Thêm 2 biến này cho hàm /start
+HOMEPAGE = LINK_DANG_KY
+ADMIN_LINK = CSKH001
+
 BAD_WORDS = [
     "đụ", "địt", "dm", "dcm", "mẹ mày", "ngu", "cc", "lồn",
     "fuck", "bitch", "shit", "xxx", "sex", "http", "https", "t.me", ".com"
@@ -39,23 +43,24 @@ logging.basicConfig(
 async def welcome(update: Update, context: ContextTypes.DEFAULT_TYPE):
     for member in update.message.new_chat_members:
         chat_id = update.message.chat_id
-    keyboard = [
-        [
-            InlineKeyboardButton("🔗 Đăng ký", url="https://www.winbook1.com"),
-            InlineKeyboardButton("💬 Live Chat", url="https://direct.lc.chat/19366399/")
-        ],
-        [
-            InlineKeyboardButton("👩‍💼 CSKH001", url="https://t.me/WinbookCSKH001"),
-            InlineKeyboardButton("👨‍💼 CSKH002", url="https://t.me/WinbookCSKH002")
-        ],
-        [
-            InlineKeyboardButton("📢 Kênh chính", url="https://t.me/WinbookEvent"),
-            InlineKeyboardButton("💭 Nhóm chat", url="https://t.me/winbook8888")
-        ],
-        [
-            InlineKeyboardButton("🌟 FANPAGE CHÍNH THỨC 🌟", url="https://www.facebook.com/profile.php?id=100076695622884")
+
+        keyboard = [
+            [
+                InlineKeyboardButton("🔗 Đăng ký", url=LINK_DANG_KY),
+                InlineKeyboardButton("💬 Live Chat", url=LIVE_CHAT)
+            ],
+            [
+                InlineKeyboardButton("👩‍💼 CSKH001", url=CSKH001),
+                InlineKeyboardButton("👨‍💼 CSKH002", url=CSKH002)
+            ],
+            [
+                InlineKeyboardButton("📢 Kênh chính", url=KENH_CHINH),
+                InlineKeyboardButton("💭 Nhóm chat", url=NHOM_CHAT)
+            ],
+            [
+                InlineKeyboardButton("🌟 FANPAGE CHÍNH THỨC 🌟", url=FANPAGE)
+            ]
         ]
-    ]
         reply_markup = InlineKeyboardMarkup(keyboard)
 
         caption = (
@@ -65,12 +70,12 @@ async def welcome(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         try:
             await context.bot.send_animation(
-    chat_id=chat_id,
-    animation=VIDEO_URL,
-    caption=caption,
-    parse_mode="HTML",
-    reply_markup=reply_markup
-       )
+                chat_id=chat_id,
+                animation=VIDEO_URL,
+                caption=caption,
+                parse_mode="HTML",
+                reply_markup=reply_markup
+            )
         except Exception as e:
             await context.bot.send_message(
                 chat_id=chat_id,
