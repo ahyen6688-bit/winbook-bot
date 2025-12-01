@@ -34,12 +34,12 @@ async def welcome(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         keyboard = [
             [
-                InlineKeyboardButton("🔰 Đăng ký", url="https://www.winbook1.com"),
+                InlineKeyboardButton("🔰 Đăng ký NHẬN 68K", url="https://www.winbook1.com"),
                 InlineKeyboardButton("💬 Live Chat", url="https://direct.lc.chat/19366399/")
             ],
             [
-                InlineKeyboardButton("👩‍💼 CSKH001", url="https://t.me/WinbookCSKH001"),
-                InlineKeyboardButton("👨‍💼 CSKH002", url="https://t.me/WinbookCSKH002")
+                InlineKeyboardButton("👩‍💼 TELE CS001", url="https://t.me/WinbookCSKH001"),
+                InlineKeyboardButton("👨‍💼 TELE CS002", url="https://t.me/WinbookCSKH002")
             ],
             [
                 InlineKeyboardButton("📢 Kênh Chính", url="https://t.me/WinbookEvent"),
