@@ -7,7 +7,7 @@ from keep_alive import keep_alive
 # ⚙️ CẤU HÌNH
 # =======================
 TOKEN = os.getenv("BOT_TOKEN")
-VIDEO_URL = "https://i.postimg.cc/52vs8rFb/BANNER-CH-O-TH-NH-VI-N.gif"
+VIDEO_URL = "https://cdn-cf-east.streamable.com/video/mp4/64l3hy.mp4"
 HOMEPAGE = "https://www.winbook1.com"
 
 BAD_WORDS = [
