@@ -35,7 +35,7 @@ async def welcome(update: Update, context: ContextTypes.DEFAULT_TYPE):
         keyboard = [
             [
                 InlineKeyboardButton("🔰 ĐK NHẬN 68K", url="https://www.winbook1.com"),
-                InlineKeyboardButton("💬 Live Chat", url="https://direct.lc.chat/19366399/")
+                InlineKeyboardButton("💬 Live Chat", url="https://direct.lc.chat/19402567/")
             ],
             [
                 InlineKeyboardButton("👩‍💼 TELE CS001", url="https://t.me/WinbookCSKH001"),
