@@ -108,7 +108,7 @@ async def check_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [
         [
-            InlineKeyboardButton("🔰 Đăng ký", url="https://www.winbook1.com"),
+            InlineKeyboardButton("🔰 LINK ĐĂNG KÝ", url="https://www.winbook1.com"),
             InlineKeyboardButton("💬 Live Chat", url="https://direct.lc.chat/19366399/")
         ],
         [
