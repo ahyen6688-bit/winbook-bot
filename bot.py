@@ -54,7 +54,6 @@ async def welcome(update: Update, context: ContextTypes.DEFAULT_TYPE):
         caption = (
             f"🎉 Chào mừng {member.mention_html()} đến với Winbook!\n\n"
             f"🧡 Chúc bạn vui vẻ và may mắn trong nhóm nhé 🧡"
-            f"👉 Bấm lệnh /KM để nhận code 68K"
         )
 
         try:
