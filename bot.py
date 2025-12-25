@@ -77,20 +77,38 @@ async def welcome(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # 🚫 LỌC TIN NHẮN XẤU
 # =======================
 async def check_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    user = update.message.from_user
-    text = update.message.text.lower()
-    chat_id = update.message.chat_id
+    message = update.message
+    if not message or not message.text:
+        return
 
+    user = message.from_user
+    text = message.text.lower()
+    chat_id = message.chat_id
+    user_id = user.id
+
+    # 1️⃣ Bỏ qua BOT
+    if user.is_bot:
+        return
+
+    # 2️⃣ Bỏ qua admin / chủ nhóm
+    member = await context.bot.get_chat_member(chat_id, user_id)
+    if member.status in ["administrator", "creator"]:
+        return
+
+    # 3️⃣ Chỉ member thường mới bị xử
     if any(bad_word in text for bad_word in BAD_WORDS):
-        await update.message.delete()
-        user_id = user.id
+        await message.delete()
+
         violation_count[user_id] = violation_count.get(user_id, 0) + 1
         count = violation_count[user_id]
 
         if count < 3:
             await context.bot.send_message(
                 chat_id=chat_id,
-                text=f"⚠️ {user.mention_html()} vi phạm lần {count}/3. Cẩn thận kẻo bị kick!",
+                text=(
+                    f"⚠️ {user.mention_html()} vi phạm lần {count}/3\n"
+                    f"🚫 Nhóm không cho phép gửi link / từ ngữ phản cảm."
+                ),
                 parse_mode="HTML"
             )
         else:
@@ -101,6 +119,7 @@ async def check_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             )
             await context.bot.ban_chat_member(chat_id, user_id)
             violation_count.pop(user_id, None)
+
 
 # =======================
 # 🧩 LỆNH /START
